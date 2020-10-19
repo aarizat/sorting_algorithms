@@ -15,21 +15,23 @@ void shell_sort(int *array, size_t size)
 	{
 		h = 3 * h + 1;
 	}
-	while (h > 0)
+	if (array && size >= 2)
 	{
-		for (i = h; i < (int)size; i += h)
+		while (h >= 1)
 		{
-			for (j = i; j > 0 && array[j] < array[j - h]; j -= h)
+			for (i = h; i < (int)size; i++)
 			{
+				for (j = i; j >= h && array[j] < array[j - h];
+					j -= h)
+				{
 
-				tmp = array[j];
-				array[j] = array[j - h];
-				array[j - h] = tmp;
+					tmp = array[j];
+					array[j] = array[j - h];
+					array[j - h] = tmp;
+				}
 			}
+			print_array(array, size);
+			h = h / 3;
 		}
-		print_array(array, size);
-		h = (h - 1) / 3;
 	}
-
-
 }
